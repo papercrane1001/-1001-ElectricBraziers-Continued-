@@ -19,7 +19,9 @@
     <designationCategory>Furniture</designationCategory>
     <uiIconOffset>(0, -0.04)</uiIconOffset>
     <minifiedDef>MinifiedThing</minifiedDef>
-	<paintable>true</paintable>
+	<building>
+		<paintable>true</paintable>
+	</building>
     <stuffCategories>
       <li>Metallic</li>
       <li>Stony</li>
