@@ -29,7 +29,11 @@ namespace EB
     class CompToggleGlower : CompGlower
     {
         public bool IsDarklight = false;
-
+        private CompPowerTrader parentPowerTrader;
+        public void RegisterParentPowerTracer(CompPowerTrader parentComp)
+        {
+            parentPowerTrader = parentComp;
+        }
         public override IEnumerable<Gizmo> CompGetGizmosExtra()
         {
             foreach (var g in base.CompGetGizmosExtra())
@@ -48,8 +52,11 @@ namespace EB
                     action = delegate {
                         IsDarklight = !IsDarklight;
                         SetLightColor();
-                        base.parent.Map.glowGrid.DeRegisterGlower(this);
-                        base.parent.Map.glowGrid.RegisterGlower(this);
+                        if (parentPowerTrader?.PowerOn == true)
+                        {
+                            base.parent.Map.glowGrid.DeRegisterGlower(this);
+                            base.parent.Map.glowGrid.RegisterGlower(this);
+                        }
                         base.parent.Map.mapDrawer.MapMeshDirty(base.parent.Position, MapMeshFlagDefOf.Things);
                     },
                     defaultLabel = "EB.ToggleGlowColor".Translate(),

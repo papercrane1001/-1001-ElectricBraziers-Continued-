@@ -20,7 +20,7 @@ namespace EB
 
 		public new CompProperties_FireOverlay Props => (CompProperties_FireOverlay)props;
 
-		private CompPowerTrader poweredComp;
+		public CompPowerTrader poweredComp;
 		private CompToggleGlower toggleComp;
 
 		public override void PostDraw()
@@ -41,6 +41,7 @@ namespace EB
 			base.PostSpawnSetup(respawningAfterLoad);
 			this.poweredComp = this.parent.GetComp<CompPowerTrader>();
 			this.toggleComp = this.parent.GetComp<CompToggleGlower>();
+			this.toggleComp.RegisterParentPowerTracer(this.poweredComp);
 		}
 	}
 }
